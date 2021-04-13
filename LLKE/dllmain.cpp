@@ -5,9 +5,8 @@
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 HHOOK hhkLowLevelKybd = NULL;
 
-typedef void (*event)(int, int);
+typedef bool (*event)(int, int);
 event events[0xFF];
-bool disable[0xFF];
 bool debug = FALSE;
 
 // Hook and loop
@@ -31,13 +30,11 @@ _declspec(dllexport) void setDebug(bool d) {
 __declspec(dllexport) void reset() {
     for(int i = 0; i < 0xFF; i++) {
         events[i] = NULL;
-        disable[i] = FALSE;
     }
 }
 
 __declspec(dllexport) void setEvent(int vk, event e, bool d) {
     events[vk] = e;
-    disable[vk] = d;
 }
 
 // Callback
@@ -47,10 +44,8 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
         printf("Key: %d; Action: %d\n", p->vkCode, wParam);
     }
     if (events[p->vkCode] != NULL) {
-        events[p->vkCode](wParam, p->vkCode);
-        if (disable[p->vkCode]) {
+        if(events[p->vkCode](wParam, p->vkCode))
             return 1;
-        }
     }
     return CallNextHookEx(NULL, nCode, wParam, lParam);
 }

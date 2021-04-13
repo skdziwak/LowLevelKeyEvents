@@ -3,13 +3,15 @@ import ctypes
 
 active = False
 
-LLKE.set_debug(True)
+#LLKE.set_debug(True)
 
 def activate(action, vk):
     global active
     active = action == LLKE.KEY_PRESS
-    print(active)
+    #LLKE.set_event(0x5B, None)
+    print("XDD")
+    return True
 
-LLKE.set_event(0x5B, activate, True)
+LLKE.set_event(0x5B, activate)
 
 LLKE.loop()
