@@ -7,7 +7,8 @@
             {"key": "I", "action": "press", "target": "VK_UP"},
             {"key": "J", "action": "press", "target": "VK_LEFT"},
             {"key": "K", "action": "press", "target": "VK_DOWN"},
-            {"key": "L", "action": "press", "target": "VK_RIGHT"}
+            {"key": "L", "action": "press", "target": "VK_RIGHT"},
+            {"key": "1", "action": "press", "target": "VK_LSHIFT:X:D"}
         ]
     },
     "enabled_classes": ["global"]

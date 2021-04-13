@@ -23,11 +23,11 @@ def get_macro(k):
 def a_press(action, vk):
     m = get_macro(vk)
     if m:
-        vk = m['target']
-        if action == LLKE.KEY_PRESS:
-            LLKE._press_key(ctypes.c_int(vk))
-        else:
-            LLKE._release_key(ctypes.c_int(vk))
+        for vk in m['target']:
+            if action == LLKE.KEY_PRESS:
+                LLKE._press_key(ctypes.c_int(vk))
+            else:
+                LLKE._release_key(ctypes.c_int(vk))
         return True
     return False
 
@@ -48,7 +48,7 @@ for cl, macros in config['classes'].items():
             LLKE.set_event(m['keycode'], a_switch)
         elif m['action'] == 'press':
             LLKE.set_event(m['keycode'], a_press)
-            m['target'] = LLKE.keycode(m['target'])
+            m['target'] = [LLKE.keycode(e) for e in m['target'].split(':')]
 
 
 
