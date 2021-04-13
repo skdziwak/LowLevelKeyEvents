@@ -38,9 +38,12 @@ KEYSETS = [
 ]
 
 def keycode(k):
-    k = k.upper()
-    b = bytes(k, encoding='ascii')[0]
-    for fl, offset in KEYSETS:
-        if b >= fl[0] and b <= fl[1]:
-            return b - fl[0] + offset
+    if type(k) == int:
+        return k
+    if len(k) == 1:
+        k = k.upper()
+        b = bytes(k, encoding='ascii')[0]
+        for fl, offset in KEYSETS:
+            if b >= fl[0] and b <= fl[1]:
+                return b - fl[0] + offset
     return getattr(LLKE_KEYS, k)
