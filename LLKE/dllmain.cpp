@@ -27,6 +27,28 @@ _declspec(dllexport) void setDebug(bool d) {
     debug = d;
 }
 
+__declspec(dllexport) void releaseKey(int k) {
+    INPUT ip;
+    ip.type = INPUT_KEYBOARD;
+    ip.ki.wScan = 0;
+    ip.ki.time = 0;
+    ip.ki.dwExtraInfo = 0;
+    ip.ki.wVk = k;
+    ip.ki.dwFlags = 2;
+    SendInput(1, &ip, sizeof(INPUT));
+}
+
+__declspec(dllexport) void pressKey(int k) {
+    INPUT ip;
+    ip.type = INPUT_KEYBOARD;
+    ip.ki.wScan = 0;
+    ip.ki.time = 0;
+    ip.ki.dwExtraInfo = 0;
+    ip.ki.wVk = k;
+    ip.ki.dwFlags = 0;
+    SendInput(1, &ip, sizeof(INPUT));
+}
+
 __declspec(dllexport) void reset() {
     for(int i = 0; i < 0xFF; i++) {
         events[i] = NULL;

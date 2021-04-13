@@ -11,6 +11,8 @@ _set_event = getattr(_llkeDll, '?setEvent@@YAXHP6A_NHH@Z_N@Z')
 _loop = getattr(_llkeDll, '?loop@@YAXXZ')
 _reset = getattr(_llkeDll, '?reset@@YAXXZ')
 _set_debug = getattr(_llkeDll, '?setDebug@@YAX_N@Z')
+_press_key = getattr(_llkeDll, '?pressKey@@YAXH@Z')
+_release_key = getattr(_llkeDll, '?releaseKey@@YAXH@Z')
 _fptr = ctypes.CFUNCTYPE(ctypes.c_bool, ctypes.c_int, ctypes.c_int) #void return type; int action; int vk;
 _reset()
     

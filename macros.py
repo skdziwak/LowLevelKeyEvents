@@ -23,7 +23,11 @@ def get_macro(k):
 def a_press(action, vk):
     m = get_macro(vk)
     if m:
-        print(m['target'])
+        vk = m['target']
+        if action == LLKE.KEY_PRESS:
+            LLKE._press_key(ctypes.c_int(vk))
+        else:
+            LLKE._release_key(ctypes.c_int(vk))
         return True
     return False
 
