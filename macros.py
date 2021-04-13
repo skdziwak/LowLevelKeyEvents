@@ -1,9 +1,12 @@
+import json
 import LLKE
 import ctypes
+from pathlib import Path
+
 
 active = False
 
-#LLKE.set_debug(True)
+LLKE.set_debug(True)
 
 def activate(action, vk):
     global active
@@ -12,6 +15,6 @@ def activate(action, vk):
     print("XDD")
     return True
 
-LLKE.set_event(0x5B, activate)
+LLKE.set_event('VK_UP', activate)
 
 LLKE.loop()

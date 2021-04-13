@@ -1,5 +1,6 @@
 import os
 import ctypes
+import LLKE_KEYS
 
 KEY_PRESS = 256
 KEY_RELEASE = 257
@@ -15,6 +16,8 @@ _reset()
     
 functions = []
 def set_event(vk, f):
+    if type(vk) == str:
+        vk = keycode(vk)
     if f == None:
         ptr = NULL
     else:
@@ -28,3 +31,16 @@ def loop():
 
 def set_debug(d):
     _set_debug(ctypes.c_bool(d))
+
+KEYSETS = [
+    (bytes('09', encoding='ascii'), 0x30),
+    (bytes('AZ', encoding='ascii'), 0x41)
+]
+
+def keycode(k):
+    k = k.upper()
+    b = bytes(k, encoding='ascii')[0]
+    for fl, offset in KEYSETS:
+        if b >= fl[0] and b <= fl[1]:
+            return b - fl[0] + offset
+    return getattr(LLKE_KEYS, k)
