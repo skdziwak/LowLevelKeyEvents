@@ -42,6 +42,8 @@ KEYSETS = [
 def keycode(k):
     if type(k) == int:
         return k
+    if k.startswith('0x'):
+        return int(k[2:], 16)
     if len(k) == 1:
         k = k.upper()
         b = bytes(k, encoding='ascii')[0]
