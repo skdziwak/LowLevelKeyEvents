@@ -2,6 +2,7 @@ import json
 import LLKE
 import ctypes
 import argparse
+import os
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
@@ -32,6 +33,13 @@ def a_press(action, vk):
                 LLKE._press_key(ctypes.c_int(vk))
             else:
                 LLKE._release_key(ctypes.c_int(vk))
+        return True
+    return False
+
+def a_shell(action, vk):
+    m = get_macro(vk)
+    if m and action == LLKE.KEY_RELEASE:
+        os.system(m['target'])
         return True
     return False
 
@@ -66,6 +74,8 @@ for cl, macros in config['classes'].items():
             m['target'] = [LLKE.keycode(e) for e in m['target'].split(':')]
         elif m['action'] == 'hold':
             LLKE.set_event(m['keycode'], a_hold)
+        elif m['action'] == 'shell':
+            LLKE.set_event(m['keycode'], a_shell)
 
 
 
