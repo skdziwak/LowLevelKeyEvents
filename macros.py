@@ -32,14 +32,25 @@ def a_press(action, vk):
     return False
 
 def a_switch(action, vk):
-    if action == LLKE.KEY_RELEASE:
-        m = get_macro(vk)
-        if m:
+    m = get_macro(vk)
+    if m:
+        if action == LLKE.KEY_RELEASE:
             if m['target'] in enabled_classes:
                 enabled_classes.remove(m['target'])
             else:
                 enabled_classes.add(m['target'])
-    return True
+        return True
+    return False
+
+def a_hold(action, vk):
+    m = get_macro(vk)
+    if m:
+        if action == LLKE.KEY_PRESS:
+            enabled_classes.add(m['target'])
+        elif action == LLKE.KEY_RELEASE:
+            enabled_classes.discard(m['target'])
+        return True
+    return False
 
 for cl, macros in config['classes'].items():
     for m in macros:
@@ -49,6 +60,8 @@ for cl, macros in config['classes'].items():
         elif m['action'] == 'press':
             LLKE.set_event(m['keycode'], a_press)
             m['target'] = [LLKE.keycode(e) for e in m['target'].split(':')]
+        elif m['action'] == 'hold':
+            LLKE.set_event(m['keycode'], a_hold)
 
 
 

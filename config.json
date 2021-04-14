@@ -1,9 +1,12 @@
 {
     "classes": {
         "global": [
-            {"key": 91, "action": "switch", "target": "layer2"}
+            {"key": 91, "action": "hold", "target": "layers"}
         ],
-        "layer2": [
+        "layers": [
+            {"key": "1", "action": "switch", "target": "layer1"}
+        ],
+        "layer1": [
             {"key": "W", "action": "press", "target": "VK_UP"},
             {"key": "A", "action": "press", "target": "VK_LEFT"},
             {"key": "S", "action": "press", "target": "VK_DOWN"},
