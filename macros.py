@@ -1,10 +1,14 @@
 import json
 import LLKE
 import ctypes
+import argparse
 from pathlib import Path
-from copy import copy
 
-config = json.loads(Path('config.json').read_text())
+parser = argparse.ArgumentParser()
+parser.add_argument('config', type=str)
+args = parser.parse_args()
+
+config = json.loads(Path(args.config).read_text())
 
 active = False
 

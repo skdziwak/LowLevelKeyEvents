@@ -1,21 +1,22 @@
 {
     "classes": {
         "global": [
-            {"key": 91, "action": "hold", "target": "layers"}
+            {"key": 91, "action": "hold", "target": "win"}
         ],
-        "layers": [
-            {"key": "1", "action": "switch", "target": "layer1"}
-        ],
-        "layer1": [
-            {"key": "W", "action": "press", "target": "VK_UP"},
-            {"key": "A", "action": "press", "target": "VK_LEFT"},
-            {"key": "S", "action": "press", "target": "VK_DOWN"},
-            {"key": "D", "action": "press", "target": "VK_RIGHT"},
+        "win": [
+            {"key": "1", "action": "switch", "target": "arrows"},
+
             {"key": "P", "action": "press", "target": "0xB3"},
             {"key": "I", "action": "press", "target": "0xAF"},
             {"key": "K", "action": "press", "target": "0xAE"},
             {"key": "J", "action": "press", "target": "0xB1"},
             {"key": "L", "action": "press", "target": "0xB0"}
+        ],
+        "arrows": [
+            {"key": "W", "action": "press", "target": "VK_UP"},
+            {"key": "A", "action": "press", "target": "VK_LEFT"},
+            {"key": "S", "action": "press", "target": "VK_DOWN"},
+            {"key": "D", "action": "press", "target": "VK_RIGHT"}
         ]
     },
     "enabled_classes": ["global"]

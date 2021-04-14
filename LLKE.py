@@ -6,7 +6,7 @@ KEY_PRESS = 256
 KEY_RELEASE = 257
 NULL = ctypes.c_int(0)
 
-_llkeDll = ctypes.WinDLL(os.path.join(os.getcwd(), 'LLKE.dll'))
+_llkeDll = ctypes.WinDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'LLKE.dll'))
 _set_event = getattr(_llkeDll, '?setEvent@@YAXHP6A_NHH@Z_N@Z')
 _loop = getattr(_llkeDll, '?loop@@YAXXZ')
 _reset = getattr(_llkeDll, '?reset@@YAXXZ')
@@ -28,7 +28,6 @@ def set_event(vk, f):
     _set_event(ctypes.c_int(vk), ptr)
 
 def loop():
-    print("Starting loop")
     _loop()
 
 def set_debug(d):
